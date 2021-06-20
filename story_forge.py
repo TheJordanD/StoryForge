@@ -6,7 +6,7 @@ import PyQt5.QtGui as qtg
 from PIL import Image
 
 names = ['Jordan', 'Preston', 'Jarel', 'Aidan', 'Rush', 'Kenobi', 'Rhema', 'Hannah', 'Anna']
-         # 'Chandler']
+         #  'Chandler']
 roles = ['Judge', 'Accused', 'Victim', 'Defendant', 'Plaintiff', 'Juror1',
          'Witness1', 'Juror2', 'Witness2', 'Foreperson', 'Juror3',
          'Witness3', 'Bailiff', 'Reporter']
