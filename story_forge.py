@@ -5,10 +5,11 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 from PIL import Image
 
-names = ['Jordan', 'Preston', 'Jarel', 'Kenobi', 'Kael', 'Aidan', 'Rush', 'Sam', 'Rhema', 'Hannah', 'Anna', 'Alee', 'Chandler', 'Razi']
+names = ['Jordan', 'Preston', 'Jarel', 'Aidan', 'Rush', 'Kenobi', 'Rhema', 'Hannah', 'Anna']
+         # 'Chandler']
 roles = ['Judge', 'Accused', 'Victim', 'Defendant', 'Plaintiff', 'Juror1',
-         'Witness1', 'Bailiff', 'Juror2', 'Witness2', 'Foreperson', 'Juror3',
-         'Witness3', 'Reporter']
+         'Witness1', 'Juror2', 'Witness2', 'Foreperson', 'Juror3',
+         'Witness3', 'Bailiff', 'Reporter']
 personalities = ['a germophobe', 'chill', 'forgetful', 'crazy', 'awkward',
                  'quiet', 'loud', 'bored', 'lazy', 'tired', 'generous',
                  'forgiving']
@@ -16,11 +17,14 @@ descriptor = ['hatred for', 'love for', 'addiction to', 'diet of',
               'obsession with']
 crimes = ['vandalizing', 'causing emotional harm to', 'stealing',
           'drowning']
-items = ['rubber chicken', 'forklift', 'sock', 'toilet', 'elk', 'toaster', 'anime', 'NF beanie', 'artwork', 'money', 'v-bucks', 'dogecoin', 'aardvark']
+items = ['rubber chicken', 'forklift', 'sock', 'toilet', 'elk', 'toaster', 'cheese', 'croc', 'family photo', 'nesting doll', 'femur bone', 'chinchilla', 'hair', 'hairbrush', 'lego']
 places = ['sandwich', 'hunting ground', 'cave', 'cousin', 'planet',
           'favorite restaurant', 'school', 'computer', 'mailbox',
           'minecraft house']
 adjectives = ['pink', 'pet', 'wild']
+motives = ['of 1995', '9/11', 'of the War', 'China', 'of the housing market crash', 'the accident', ' of their stubbed toe', 'their grandma said so', 'of Bob', 'of their enlightenment', '', 'of a broken heart', 'of amnesia']
+days = ['Christmas', 'Christmas Eve', 'Thanksgiving', 'Easter', 'Bean Day', 'A day']
+hours = ['in the wee hours', 'at 4:20 in the afternoon', 'at midnight', 'all day']
 
 
 class MainWindow(qtw.QWidget):
@@ -31,11 +35,11 @@ class MainWindow(qtw.QWidget):
         self.setLayout(qtw.QVBoxLayout())
 
         roles_lbl = qtw.QLabel('')
-        roles_lbl.setFont(qtg.QFont('Helvetica', 20))
+        roles_lbl.setFont(qtg.QFont('Courier', 25))
         self.layout().addWidget(roles_lbl)
 
         story_lbl = qtw.QLabel('')
-        story_lbl.setFont(qtg.QFont('Helvetica', 30))
+        story_lbl.setFont(qtg.QFont('Courier', 40))
         self.layout().addWidget(story_lbl)
 
         image_lbl = qtw.QLabel()
@@ -65,20 +69,24 @@ class MainWindow(qtw.QWidget):
                 rand_personality = random.randint(0, len(personalities) - 1)
                 rand_descriptor = random.randint(0, len(descriptor) - 1)
                 rand_item = random.randint(0, len(items) - 1)
-                statement = '{} {} is {} and has a {} {}s'.format(roles[idx],
+                rand_motive = random.randint(0, len(motives) - 1)
+                statement = '{} {} is {} and has a {} {}s because {}'.format(roles[idx],
                                                               names[idx],
                                                               personalities[
                                                                   rand_personality],
                                                               descriptor[
                                                                   rand_descriptor],
                                                               items[
-                                                                  rand_item])
+                                                                  rand_item],
+                                                              motives[rand_motive])
 
                 roles_statements = roles_statements + '\n' + statement
                 print(statement)
 
                 idx += 1
 
+            rand_day = random.randint(0, len(days) - 1)
+            rand_hour = random.randint(0, len(hours) - 1)
             rand_crime = random.randint(0, len(crimes) - 1)
             rand_item = random.randint(0, len(items) - 1)
             rand_place = random.randint(0, len(places) - 1)
@@ -91,7 +99,7 @@ class MainWindow(qtw.QWidget):
             print(story)
 
             roles_lbl.setText(roles_statements)
-            story_lbl.setText(story)
+            story_lbl.setText('{} {}\n{}'.format(days[rand_day], hours[rand_hour], story))
 
             # Image generation
             image_path = Path('images/{}.png'.format(items[rand_item]))
