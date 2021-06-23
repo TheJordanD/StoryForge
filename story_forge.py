@@ -25,7 +25,7 @@ adjectives = ['pink', 'pet', 'wild']
 motives = ['of 1995', '9/11', 'of the War', 'China', 'of the housing market crash', 'the accident', ' of their stubbed toe', 'their grandma said so', 'of Bob', 'of their enlightenment', '', 'of a broken heart', 'of amnesia']
 days = ['Christmas', 'Christmas Eve', 'Thanksgiving', 'Easter', 'Bean Day', 'A day']
 hours = ['in the wee hours', 'at 4:20 in the afternoon', 'at midnight', 'all day']
-
+outcomes = ['Guilty', 'Innocent']
 
 class MainWindow(qtw.QWidget):
     def __init__(self):
@@ -91,12 +91,14 @@ class MainWindow(qtw.QWidget):
             rand_item = random.randint(0, len(items) - 1)
             rand_place = random.randint(0, len(places) - 1)
             rand_adj = random.randint(0, len(adjectives) - 1)
+            rand_outcome = random.randint(0, len(outcomes) - 1)
             story = '{} is being accused of {} {}\'s {} {} from their {}'.format(
                 role['Accused'], crimes[rand_crime], role['Victim'],
                 adjectives[rand_adj],
                 items[rand_item],
                 places[rand_place])
             print(story)
+            print('{} was {}'.format(role['Accused'], outcomes[rand_outcome]))
 
             roles_lbl.setText(roles_statements)
             story_lbl.setText('{} {}\n{}'.format(days[rand_day], hours[rand_hour], story))
