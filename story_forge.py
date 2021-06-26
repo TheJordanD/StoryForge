@@ -5,8 +5,8 @@ import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 from PIL import Image
 
-names = ['Jordan', 'Preston', 'Jarel', 'Aidan', 'Rush', 'Kenobi', 'Rhema', 'Hannah', 'Anna']
-         #  'Chandler']
+names = []
+
 roles = ['Judge', 'Accused', 'Victim', 'Defendant', 'Plaintiff', 'Juror1',
          'Witness1', 'Juror2', 'Witness2', 'Foreperson', 'Juror3',
          'Witness3', 'Bailiff', 'Reporter']
@@ -26,6 +26,7 @@ motives = ['of 1995', '9/11', 'of the War', 'China', 'of the housing market cras
 days = ['Christmas', 'Christmas Eve', 'Thanksgiving', 'Easter', 'Bean Day', 'A day']
 hours = ['in the wee hours', 'at 4:20 in the afternoon', 'at midnight', 'all day']
 outcomes = ['Guilty', 'Innocent']
+
 
 class MainWindow(qtw.QWidget):
     def __init__(self):
@@ -56,11 +57,9 @@ class MainWindow(qtw.QWidget):
 
         def generate():
             random.seed(os.urandom(1), 2)
-            print('There are ' + str(len(names)) + ' Players')
-
             random.shuffle(names)
 
-            roles_statement = ''
+            # Roles and personalities statement generation
             role = {}
             idx = 0
             roles_statements = ''
@@ -82,9 +81,9 @@ class MainWindow(qtw.QWidget):
 
                 roles_statements = roles_statements + '\n' + statement
                 print(statement)
-
                 idx += 1
 
+            # Randomizers
             rand_day = random.randint(0, len(days) - 1)
             rand_hour = random.randint(0, len(hours) - 1)
             rand_crime = random.randint(0, len(crimes) - 1)
@@ -92,6 +91,8 @@ class MainWindow(qtw.QWidget):
             rand_place = random.randint(0, len(places) - 1)
             rand_adj = random.randint(0, len(adjectives) - 1)
             rand_outcome = random.randint(0, len(outcomes) - 1)
+
+            # Story generator
             story = '{} is being accused of {} {}\'s {} {} from their {}'.format(
                 role['Accused'], crimes[rand_crime], role['Victim'],
                 adjectives[rand_adj],
@@ -100,6 +101,7 @@ class MainWindow(qtw.QWidget):
             print(story)
             print('{} was {}'.format(role['Accused'], outcomes[rand_outcome]))
 
+            # Set text
             roles_lbl.setText(roles_statements)
             story_lbl.setText('{} {}\n{}'.format(days[rand_day], hours[rand_hour], story))
 
